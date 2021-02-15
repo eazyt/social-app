@@ -1,8 +1,11 @@
+// const path = require('path')
 const express = require('express');
 const engine = require('ejs-mate');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser')
+
+const  loginRoutes  = require('./routes/loginRoutes')
 
 const app = express();
 
@@ -19,10 +22,11 @@ mongoose.connect(config.database, {
   console.log(`succefully connected to the Database`)
 })
 .catch((e) => {
-  console.log(`something went wrong, could not connect to database`, e)
+  console.log(`something went wrong, could not connect to database,`, e)
 })
 
 app.use(express.static(__dirname + '/public'));
+// app.use(express.static(path.join(__dirname , 'public')));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -31,18 +35,13 @@ app.use(bodyParser.urlencoded({
 
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);
-
-// app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs'); // so you can render('index')
 
-// render 'index' into 'boilerplate':
-app.get('/', (req, res, next) => {
-  res.send('<h1>Hello World</h1>')
-  // res.render('index', {
-  //   what: 'best',
-  //   who: 'me'
-  // });
-});
+// app.set('views', __dirname + '/views');
+
+
+// Routes
+app.use(loginRoutes);
 
 app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`)
