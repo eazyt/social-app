@@ -19,7 +19,7 @@ mongoose.connect(config.database, {
   console.log(`succefully connected to the Database`)
 })
 .catch((e) => {
-  console.log(`could not connect to database`, e)
+  console.log(`something went wrong, could not connect to database`, e)
 })
 
 app.use(express.static(__dirname + '/public'));
