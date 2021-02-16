@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser')
 
-const  loginRoutes  = require('./routes/loginRoutes')
+const  loginRoute  = require('./routes/loginRoute')
+const  signUpRoute  = require('./routes/signUpRoute')
 
 const app = express();
 
@@ -41,7 +42,8 @@ app.set('view engine', 'ejs'); // so you can render('index')
 
 
 // Routes
-app.use(loginRoutes);
+app.use(loginRoute);
+app.use(signUpRoute);
 
 app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`)
