@@ -4,6 +4,9 @@ const engine = require('ejs-mate');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser')
+const flash = require('req-flash')
+const session = require('express-session')
+
 
 const  loginRoute  = require('./routes/loginRoute')
 const  signUpRoute  = require('./routes/signUpRoute')
@@ -33,6 +36,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use(session({
+  secret: config.secretKey,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {secure: true}
+}))
+app.use(flash())
+
+app.locals.errors = 0;
 
 // use ejs-locals for all ejs templates:
 app.engine('ejs', engine);

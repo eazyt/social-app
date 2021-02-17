@@ -4,16 +4,26 @@
 <div class="wrapper">
     <div class="loginContainer">
 
-      <form  id="signupForm" method="post" onsubmit="event.preventDefault(); validateForm();">
+      <form  action="/signup" id="signupForm" method="post" onsubmit="event.preventDefault(); validateForm();">
           <h1>Sign Up</h1>
+          <% if(errors.length > 0) { %>
+
+            
+            <div class="alert alert-warning alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Warning!</strong> please try again: 
+              <%= errors %>
+            </div>
+
+
+          <% } %> 
+          <input type="text"  placeholder="First Name" name="firstName"  required>
+          <input type="text"  placeholder="Last Name" name="lastName"  required>
+          <input type="text"  placeholder="Username" name="username"  required>
+          <input type="email"  placeholder="Email" name="email"  required>
           
-          <input type="text"  placeholder="firstName" name="First Name" value="firstName" required>
-          <input type="text"  placeholder="lastName" name="Last Name" value="lastName" required>
-          <input type="text"  placeholder="username" name="username" value="username" required>
-          <input type="email"  placeholder="email" name="email" value="email" required>
-          
-          <input id="password" type="password" placeholder="password" name="password" required>
-          <input id="passwordConfirm" type="password" placeholder="confirm password" name="passwordConfirm" required>
+          <input id="password" type="password" placeholder="Enter Password" name="password" required>
+          <input id="passwordConfirm" type="password" placeholder="Confirm Password" name="passwordConfirm" required>
           <input type="submit" value="Sign Up" >
           <a href="/login" >Already have an account? Login here</a>
           

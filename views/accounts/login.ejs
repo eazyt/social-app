@@ -6,6 +6,18 @@
 
       <form  method="post">
           <h1>Login</h1>
+
+          <% if(errors.length > 0) { %>
+
+            
+            <div class="alert alert-danger alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Error!</strong> please try again: 
+              <%= errors %>
+            </div>
+
+
+          <% } %> 
           
           <input type="text"  placeholder="username or email" name="email" required>
           
